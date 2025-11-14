@@ -146,25 +146,31 @@ st.markdown("""
             color: #333333 !important;
         }
         .stSidebar {
-            color: #333333 !important;
+            color: #ffffff !important; /* Bright white for sidebar text on phone */
         }
         .stSidebar label {
-            color: #333333 !important;
+            color: #ffffff !important;
             opacity: 1 !important;
         }
         .stSidebar .stSelectbox label {
-            color: #333333 !important;
+            color: #ffffff !important;
         }
-        /* Mobile-specific: Make province selectbox text green to match metrics */
+        /* Match number input values: Bright white text */
+        .stSidebar input[type="number"] {
+            color: #ffffff !important;
+            background-color: rgba(0,0,0,0.5) !important; /* Semi-dark bg for contrast */
+        }
         .stSidebar .stSelectbox div[role="combobox"] {
-            color: #27ae60 !important;
+            color: #ffffff !important;
+            background-color: rgba(0,0,0,0.5) !important;
         }
         .stSidebar .stSelectbox option {
-            color: #27ae60 !important;
-            background-color: #f0f4f8 !important;
+            color: #ffffff !important;
+            background-color: rgba(0,0,0,0.5) !important;
         }
         .stSidebar .stSelectbox div[data-baseweb="select"] {
-            color: #27ae60 !important;
+            color: #ffffff !important;
+            background-color: rgba(0,0,0,0.5) !important;
         }
     }
     .stButton>button {
