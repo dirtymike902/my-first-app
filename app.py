@@ -213,6 +213,10 @@ st.markdown("""
             -webkit-text-fill-color: #ffffff !important;
             background-color: rgba(0,0,0,0.5) !important;
         }
+        /* Extra boost for sidebar header and labels on mobile */
+        .stSidebar h4 {
+            color: #ffffff !important;
+        }
     }
     .stButton>button {
         background-color: #3498db;
