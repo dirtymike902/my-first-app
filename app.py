@@ -155,6 +155,17 @@ st.markdown("""
         .stSidebar .stSelectbox label {
             color: #333333 !important;
         }
+        /* Mobile-specific: Make province selectbox text green to match metrics */
+        .stSidebar .stSelectbox div[role="combobox"] {
+            color: #27ae60 !important;
+        }
+        .stSidebar .stSelectbox option {
+            color: #27ae60 !important;
+            background-color: #f0f4f8 !important;
+        }
+        .stSidebar .stSelectbox div[data-baseweb="select"] {
+            color: #27ae60 !important;
+        }
     }
     .stButton>button {
         background-color: #3498db;
