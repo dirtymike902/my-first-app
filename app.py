@@ -1,5 +1,10 @@
 import streamlit as st
 
+# Import Google Fonts for cool sticker font
+st.markdown("""
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+""", unsafe_allow_html=True)
+
 # Custom CSS for styling
 st.markdown("""
     <style>
@@ -7,9 +12,38 @@ st.markdown("""
         background-color: #f0f4f8;
     }
     .main-title {
-        color: #2c3e50;
+        color: #8B4513;
         font-family: 'Arial', sans-serif;
         text-align: center;
+        font-size: 2.5em;
+    }
+    .crooked-clock {
+        display: inline-block;
+        transform: rotate(-15deg);
+        margin-right: 5px;
+    }
+    .money-bag {
+        display: inline-block;
+        transform: rotate(5deg);
+        margin-left: 10px;
+        font-size: 1.2em;
+    }
+    .subtitle {
+        color: #8B4513;
+        text-align: center;
+        font-size: 1.2em;
+        margin-top: -10px;
+    }
+    .logo {
+        font-family: 'Permanent Marker', cursive;
+        font-size: 1.5em;
+        background-color: #FFD700;
+        color: #8B4513;
+        border-radius: 15px;
+        padding: 8px 12px;
+        display: inline-block;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        transform: rotate(-2deg); /* Slight tilt for sticker vibe */
     }
     .section-header {
         color: #34495e;
@@ -104,7 +138,8 @@ def calculate_ei(gross):
     return min(gross, max_insurable) * rate
 
 # Streamlit app
-st.markdown("<h1 class='main-title'>🕒 Time Well Spent by Dirty Mike</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='main-title'><span class='crooked-clock'>🕒</span> Time Well Spent <span class='money-bag'>💰</span></h1>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>By - <span class='logo'>Dirty Mike</span></p>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #7f8c8d;'>For Nova Scotia, Canada (2025 rates)</p>", unsafe_allow_html=True)
 
 st.write("""
