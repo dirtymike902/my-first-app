@@ -5,7 +5,7 @@ st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# Custom CSS for styling
+# Custom CSS for styling - including money rain styles
 st.markdown("""
     <style>
     .stApp {
@@ -63,6 +63,33 @@ st.markdown("""
     }
     .warning-metric .metric-value {
         color: #e74c3c !important;
+    }
+    /* Money rain animation */
+    @keyframes fall {
+        0% {
+            transform: translateY(-100vh) rotate(0deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+    .money-rain {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        width: 100vw !important;
+        height: 100vh !important;
+        pointer-events: none !important;
+        z-index: 9999 !important;
+        overflow: hidden !important;
+    }
+    .money {
+        position: absolute !important;
+        font-size: 24px !important;
+        animation: fall linear infinite !important;
+        will-change: transform !important;
     }
     /* Force light theme and dark text on iOS/mobile dark mode */
     @media (prefers-color-scheme: dark) {
@@ -139,6 +166,9 @@ st.markdown("""
         .stSidebar label {
             color: #333333 !important;
             opacity: 1 !important;
+        }
+        .money {
+            font-size: 18px !important; /* Smaller on mobile */
         }
     }
     .stButton>button {
@@ -280,59 +310,46 @@ if calculate_button and hourly_wage > 0:
         st.header("Time to Afford Your Purchase")
         st.success(f"To afford **${purchase:,.2f}**, you need to work **{hours} hours and {minutes} minutes**. ⏰")
         
-        # Falling money animation instead of snow
-        st.markdown("""
-        <style>
-        @keyframes fall {
-            0% {
-                transform: translateY(-100vh) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        .money-rain {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1000;
-            overflow: hidden;
-        }
-        .money {
-            position: absolute;
-            font-size: 24px;
-            animation: fall linear infinite;
-        }
-        </style>
-        <div class="money-rain"></div>
+        # Trigger falling money using components.html for reliable JS execution
+        import streamlit.components.v1 as components
+        money_rain_html = """
+        <div id="money-rain" class="money-rain" style="display: none;"></div>
         <script>
         function createMoneyRain() {
-            const moneyRain = document.querySelector('.money-rain');
-            if (!moneyRain) return;
-            const moneyEmojis = ['💵', '💰', '🪙', '💎'];
-            for (let i = 0; i < 50; i++) {
+            const moneyRain = document.getElementById('money-rain');
+            if (!moneyRain || moneyRain.style.display !== 'none') return;
+            moneyRain.style.display = 'block';
+            const moneyEmojis = ['💵', '💰', '🪙', '💎', '🤑'];
+            const numBills = 60; // More for fuller effect
+            for (let i = 0; i < numBills; i++) {
                 const money = document.createElement('div');
                 money.className = 'money';
                 money.innerHTML = moneyEmojis[Math.floor(Math.random() * moneyEmojis.length)];
                 money.style.left = Math.random() * 100 + '%';
-                money.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                money.style.animationDuration = (Math.random() * 4 + 3) + 's'; // Slower fall
                 money.style.animationDelay = Math.random() * 2 + 's';
+                money.style.opacity = Math.random() * 0.5 + 0.5; // Vary opacity
                 moneyRain.appendChild(money);
+                // Auto-cleanup after animation
                 setTimeout(() => {
                     if (money.parentNode) {
                         money.parentNode.removeChild(money);
                     }
-                }, 5000);
+                }, 7000);
             }
+            // Hide container after 10s to reset for next calc
+            setTimeout(() => {
+                moneyRain.style.display = 'none';
+                // Clear any remaining children
+                while (moneyRain.firstChild) {
+                    moneyRain.removeChild(moneyRain.firstChild);
+                }
+            }, 10000);
         }
-        // Trigger after a short delay to ensure DOM is ready
-        setTimeout(createMoneyRain, 100);
+        // Run immediately
+        createMoneyRain();
         </script>
-        """, unsafe_allow_html=True)
+        """
+        components.html(money_rain_html, height=0, width=0)
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
