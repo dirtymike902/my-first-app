@@ -1,4 +1,17 @@
 import streamlit as st
+import requests
+from PIL import Image
+from io import BytesIO
+
+# Function to load image from URL
+@st.cache_data
+def load_image(url):
+    try:
+        response = requests.get(url)
+        img = Image.open(BytesIO(response.content))
+        return img
+    except:
+        return None
 
 # Import Google Fonts for cool sticker font
 st.markdown("""
@@ -61,8 +74,52 @@ st.markdown("""
         font-size: 20px !important;
         color: #27ae60 !important;
     }
+    /* Money-themed metrics: Green for positive (like cash), Gold/Yellow for gross/net */
+    .metric-container .stMetric > label {
+        color: #333333 !important;
+    }
+    .metric-container .stMetric > div > div {
+        background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important; /* Green gradient for money feel */
+        color: #ffffff !important;
+        border-radius: 8px !important;
+        padding: 10px !important;
+        box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3) !important;
+    }
+    .metric-container .stMetric > div > div .metric-value {
+        color: #ffffff !important; /* White text on green bg for contrast */
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5) !important;
+    }
+    /* Gold theme for gross income (shiny!) */
+    .stMetric:has(> div:contains("Gross")) .stMetric > div > div {
+        background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%) !important; /* Gold/orange gradient */
+        box-shadow: 0 4px 8px rgba(243, 156, 18, 0.4) !important;
+    }
+    /* Warning metrics: Red tint but with money edge */
+    .warning-metric .stMetric > div > div {
+        background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%) !important;
+        box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3) !important;
+    }
     .warning-metric .metric-value {
-        color: #e74c3c !important;
+        color: #ffffff !important;
+    }
+    /* Shine effect: Add a subtle glow to key elements */
+    .logo::after {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(45deg, #FFD700, #FFA500, #FFD700);
+        border-radius: 17px;
+        z-index: -1;
+        animation: shine 2s infinite;
+        opacity: 0.7;
+    }
+    @keyframes shine {
+        0% { opacity: 0.7; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.02); }
+        100% { opacity: 0.7; transform: scale(1); }
     }
     /* Force light theme and dark text on iOS/mobile dark mode */
     @media (prefers-color-scheme: dark) {
@@ -85,6 +142,7 @@ st.markdown("""
         .stSidebar label {
             color: #333333 !important;
             font-weight: 500 !important;
+            opacity: 1 !important;
         }
         .stSidebar .stMarkdown {
             color: #333333 !important;
@@ -121,6 +179,14 @@ st.markdown("""
         .stSidebar [data-testid="column"] label, .stSidebar [data-testid="stNumberInput"] label {
             color: #333333 !important;
             opacity: 1 !important;
+        }
+        /* Override metrics in dark mode */
+        .metric-container .stMetric > div > div {
+            background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%) !important;
+            color: #ffffff !important;
+        }
+        .stMetric:has(> div:contains("Gross")) .stMetric > div > div {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%) !important;
         }
     }
     /* Mobile-specific tweaks for iOS Safari */
@@ -223,6 +289,17 @@ def calculate_ei(gross):
 st.markdown("<h1 class='main-title'><span class='crooked-clock'>🕒</span> Time Well Spent <span class='money-bag'>💰</span></h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>By - <span class='logo'>Dirty Mike</span></p>", unsafe_allow_html=True)
 st.markdown("<p style='text-align: center; color: #7f8c8d !important;'>For Nova Scotia, Canada (2025 rates)</p>", unsafe_allow_html=True)
+
+# Add thematic images
+col_img1, col_img2 = st.columns(2)
+with col_img1:
+    time_img = load_image("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=300&h=200&fit=crop")  # Clock/hourglass for time
+    if time_img:
+        st.image(time_img, caption="Time is Money", use_column_width=True)
+with col_img2:
+    money_img = load_image("https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=200&fit=crop")  # Gold coins/money stack
+    if money_img:
+        st.image(money_img, caption="Stack That Cash", use_column_width=True)
 
 st.write("""
 This app helps you understand how much time you need to work to afford your purchases, after accounting for taxes and deductions.
