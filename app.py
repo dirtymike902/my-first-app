@@ -1,229 +1,78 @@
 import streamlit as st
 
-# Import Google Fonts for cool sticker font
+# Constants for tax brackets and rates (2025)
+FEDERAL_BRACKETS = [
+    (57375, 0.145), (114750, 0.205), (177882, 0.260), (253414, 0.290), (float('inf'), 0.330)
+]
+FEDERAL_BPA = 16129
+FEDERAL_LOWEST_RATE = 0.145
+
+NS_BRACKETS = [(30507, 0.0879), (61015, 0.1495), (95883, 0.1667), (154650, 0.1750), (float('inf'), 0.210)]
+NS_BPA = 11744
+NS_LOWEST_RATE = 0.0879
+NS_CODE = "NS"
+
+AB_BRACKETS = [(60000, 0.08), (151234, 0.10), (181481, 0.12), (241974, 0.13), (362961, 0.14), (float('inf'), 0.15)]
+AB_BPA = 22323
+AB_LOWEST_RATE = 0.08
+AB_CODE = "AB"
+
+CPP_EXEMPTION = 3500
+CPP_YMPE = 71300
+CPP_YAMPE = 81200
+CPP_RATE1 = 0.0595
+CPP_RATE2 = 0.04
+
+EI_MAX_INSURABLE = 65700
+EI_RATE = 0.0164
+
+ANNUAL_HOURS = 2080
+
+# Simplified CSS: Consolidated rules, removed redundancies (e.g., repeated color forces)
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
-""", unsafe_allow_html=True)
-
-# Custom CSS for styling - with Canadian flair: Red/white gradient bg
-st.markdown("""
     <style>
     .stApp {
-        background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important; /* Red-white-red maple vibe */
+        background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important;
         color: #333333 !important;
     }
-    body {
-        color: #333333 !important;
-    }
-    .main-title {
-        color: #8B4513 !important;
-        font-family: 'Arial', sans-serif;
-        text-align: center;
-        font-size: 2.5em;
-    }
-    .crooked-clock {
-        display: inline-block;
-        transform: rotate(-15deg);
-        margin-right: 5px;
-    }
-    .money-bag {
-        display: inline-block;
-        transform: rotate(5deg);
-        margin-left: 10px;
-        font-size: 1.2em;
-    }
-    .subtitle {
-        color: #8B4513 !important;
-        text-align: center;
-        font-size: 1.2em;
-        margin-top: -10px;
-    }
+    body { color: #333333 !important; }
+    .main-title { color: #8B4513 !important; font-family: 'Arial', sans-serif; text-align: center; font-size: 2.5em; }
+    .crooked-clock { display: inline-block; transform: rotate(-15deg); margin-right: 5px; }
+    .money-bag { display: inline-block; transform: rotate(5deg); margin-left: 10px; font-size: 1.2em; }
+    .subtitle { color: #8B4513 !important; text-align: center; font-size: 1.2em; margin-top: -10px; }
     .logo {
-        font-family: 'Permanent Marker', cursive;
-        font-size: 1.5em;
-        background-color: #FFD700;
-        color: #8B4513 !important;
-        border-radius: 15px;
-        padding: 8px 12px;
-        display: inline-block;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-        transform: rotate(-2deg); /* Slight tilt for sticker vibe */
+        font-family: 'Permanent Marker', cursive; font-size: 1.5em; background-color: #FFD700;
+        color: #8B4513 !important; border-radius: 15px; padding: 8px 12px; display: inline-block;
+        box-shadow: 2px 2px 5px rgba(0,0,0,0.3); transform: rotate(-2deg);
     }
-    .section-header {
-        color: #34495e !important;
-        font-weight: bold;
-    }
-    .metric-label {
-        font-size: 16px !important;
-        color: #333333 !important;
-    }
-    .metric-value {
-        font-size: 20px !important;
-        color: #27ae60 !important;
-    }
-    .warning-metric .metric-value {
-        color: #e74c3c !important;
-    }
-    /* Force light theme and dark text on iOS/mobile dark mode */
-    @media (prefers-color-scheme: dark) {
-        .stApp {
-            background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important;
-            color: #333333 !important;
-        }
-        body {
-            background-color: #f0f4f8 !important;
-            color: #333333 !important;
-        }
-        .main, .sidebar {
-            background-color: #f0f4f8 !important;
-            color: #333333 !important;
-        }
-        .stSidebar {
-            background-color: #f0f4f8 !important;
-            color: #333333 !important;
-        }
-        .stSidebar label {
-            color: #333333 !important;
-            font-weight: 500 !important;
-        }
-        .stSidebar .stMarkdown {
-            color: #333333 !important;
-        }
-        .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar p, .stSidebar span {
-            color: #333333 !important;
-        }
-        /* Fix for selectbox in sidebar */
-        .stSidebar .stSelectbox label {
-            color: #333333 !important;
-            opacity: 1 !important;
-        }
-        .stSidebar .stSelectbox div[role="combobox"] {
-            color: #333333 !important;
-        }
-        h1, h2, h3, p, span, div {
-            color: #333333 !important;
-        }
-        .main-title {
-            color: #8B4513 !important;
-        }
-        .subtitle {
-            color: #8B4513 !important;
-        }
-        .section-header {
-            color: #34495e !important;
-        }
-        .logo {
-            color: #8B4513 !important;
-        }
-        .metric-label, .metric-value {
-            color: inherit !important;
-        }
-        /* Target Streamlit-specific elements */
-        [data-testid="stMarkdown"] *, [data-testid="stText"] *, [data-testid="stException"] * {
-            color: #333333 !important;
-        }
-        .st-emotion-cache-* {
-            color: #333333 !important;
-        }
-        /* Sidebar input labels specifically */
-        .stSidebar [data-testid="column"] label, .stSidebar [data-testid="stNumberInput"] label {
-            color: #333333 !important;
-            opacity: 1 !important;
-        }
-        /* Extra for selectbox dropdown */
-        .stSidebar [data-testid="stSelectbox"] label, .stSidebar [data-testid="stSelectbox"] div {
-            color: #333333 !important;
-        }
-    }
-    /* Mobile-specific tweaks for iOS Safari */
-    @media (max-width: 768px) {
-        .stApp {
-            background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important;
-            color: #333333 !important;
-        }
-        body {
-            -webkit-text-size-adjust: 100% !important;
-            color: #333333 !important;
-        }
-        .stSidebar {
-            background-color: #f0f4f8 !important;
-            color: #333333 !important; /* Black text for labels on light bg */
-        }
-        .stSidebar label {
-            color: #333333 !important;
-            opacity: 1 !important;
-            font-weight: 500 !important;
-        }
-        .stSidebar .stSelectbox label {
-            color: #333333 !important;
-            opacity: 1 !important;
-            font-weight: 500 !important;
-        }
-        .stSidebar h4 {
-            color: #333333 !important;
-        }
-        /* Match number input values: Bright white text on dark bg */
-        .stSidebar input[type="number"] {
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important; /* Semi-dark bg for contrast */
-        }
-        /* Selectbox selected value: White text on dark bg, label black */
-        .stSidebar .stSelectbox div[data-baseweb="select"] {
+    .section-header { color: #34495e !important; font-weight: bold; }
+    .metric-label { font-size: 16px !important; color: #333333 !important; }
+    .metric-value { font-size: 20px !important; color: #27ae60 !important; }
+    .warning-metric .metric-value { color: #e74c3c !important; }
+    
+    /* Unified dark/light mode & mobile overrides */
+    @media (prefers-color-scheme: dark), (max-width: 768px) {
+        .stApp, body { background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important; color: #333333 !important; }
+        .main, .sidebar { background-color: #f0f4f8 !important; color: #333333 !important; }
+        .stSidebar { background-color: #f0f4f8 !important; color: #333333 !important; }
+        .stSidebar label, .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar p, .stSidebar span { color: #333333 !important; opacity: 1 !important; font-weight: 500 !important; }
+        .main-title, .subtitle, .section-header, .logo { color: #8B4513 !important; }
+        /* Sidebar inputs: Force contrast for mobile/iOS */
+        .stSidebar input[type="number"], .stSidebar [role="combobox"], .stSidebar select, .stSidebar option {
+            color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;
             background-color: rgba(0,0,0,0.5) !important;
         }
-        .stSidebar .stSelectbox div[role="combobox"] {
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
-        }
-        .stSidebar .stSelectbox div[role="combobox"] input {
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
-        }
-        .stSidebar .stSelectbox option {
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
-        }
-        .stSidebar .stSelectbox div[role="listbox"] div[role="option"] {
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
-        }
-        .stSidebar .stSelectbox > div > div > div > div > div {
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
-        }
-        /* Target common Streamlit emotion classes for selectbox text */
-        .stSidebar .css-1d391kg, .stSidebar .css-1inbwe5, .stSidebar .css-1v3b6i6 {
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
-        }
-        /* iOS Safari specific: Force white on all form controls in sidebar values */
-        .stSidebar select, .stSidebar [data-baseweb="select"] input, .stSidebar [role="combobox"] input {
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
-        }
+        [data-testid="stMarkdown"] *, [data-testid="stText"] *, h1, h2, h3, p, span, div { color: #333333 !important; }
+        .st-emotion-cache-*, .css-1d391kg, .css-1inbwe5, .css-1v3b6i6 { color: #333333 !important; }
     }
-    .stButton>button {
-        background-color: #3498db;
-        color: white;
-        border-radius: 5px;
-    }
-    .stButton>button:hover {
-        background-color: #2980b9;
-    }
+    .stButton > button { background-color: #3498db; color: white; border-radius: 5px; }
+    .stButton > button:hover { background-color: #2980b9; }
     </style>
 """, unsafe_allow_html=True)
 
 def calculate_progressive_tax(income, brackets):
-    """
-    Calculate progressive tax based on brackets.
-    brackets: list of tuples (upper_limit, rate)
-    """
+    """Calculate progressive tax based on brackets: list of (upper_limit, rate)."""
     tax = 0.0
     prev_limit = 0.0
     for limit, rate in brackets:
@@ -232,77 +81,44 @@ def calculate_progressive_tax(income, brackets):
             prev_limit = limit
         else:
             tax += (income - prev_limit) * rate
-            break
-    else:
-        # For the last bracket if income > last limit
-        if brackets[-1][0] == float('inf'):
-            tax += (income - prev_limit) * brackets[-1][1]
+            return tax
+    # Handle income exceeding last bracket if infinite
+    if brackets and brackets[-1][0] == float('inf'):
+        tax += (income - prev_limit) * brackets[-1][1]
     return tax
 
 def federal_tax(income):
-    brackets = [
-        (57375, 0.145),
-        (114750, 0.205),
-        (177882, 0.260),
-        (253414, 0.290),
-        (float('inf'), 0.330)
-    ]
-    gross_tax = calculate_progressive_tax(income, brackets)
-    # Basic personal amount credit
-    bpa_fed = 16129
-    credit = 0.145 * bpa_fed  # At lowest rate
+    """Federal tax after basic personal amount credit."""
+    gross_tax = calculate_progressive_tax(income, FEDERAL_BRACKETS)
+    credit = FEDERAL_LOWEST_RATE * FEDERAL_BPA
     return max(gross_tax - credit, 0)
 
 def prov_tax(income, province):
+    """Provincial tax after basic personal amount credit. Returns (tax, code)."""
     if province == "Nova Scotia":
-        brackets = [
-            (30507, 0.0879),
-            (61015, 0.1495),
-            (95883, 0.1667),
-            (154650, 0.1750),
-            (float('inf'), 0.210)
-        ]
-        bpa = 11744
-        lowest_rate = 0.0879
-        prov_code = "NS"
+        brackets, bpa, lowest_rate, code = NS_BRACKETS, NS_BPA, NS_LOWEST_RATE, NS_CODE
     else:  # Alberta
-        brackets = [
-            (60000, 0.08),
-            (151234, 0.10),
-            (181481, 0.12),
-            (241974, 0.13),
-            (362961, 0.14),
-            (float('inf'), 0.15)
-        ]
-        bpa = 22323
-        lowest_rate = 0.08
-        prov_code = "AB"
+        brackets, bpa, lowest_rate, code = AB_BRACKETS, AB_BPA, AB_LOWEST_RATE, AB_CODE
     
     gross_tax = calculate_progressive_tax(income, brackets)
-    # Basic personal amount credit
     credit = lowest_rate * bpa
-    return max(gross_tax - credit, 0), prov_code
+    return max(gross_tax - credit, 0), code
 
 def calculate_cpp(gross):
-    exemption = 3500
-    ympe = 71300
-    yampe = 81200
-    # First tier
-    pensionable1 = max(gross - exemption, 0)
-    cpp1 = min(pensionable1, ympe - exemption) * 0.0595
-    # Second tier
+    """CPP contributions: First and second tier."""
+    pensionable1 = max(gross - CPP_EXEMPTION, 0)
+    cpp1 = min(pensionable1, CPP_YMPE - CPP_EXEMPTION) * CPP_RATE1
     cpp2 = 0
-    if gross > ympe:
-        second_tier = min(gross - ympe, yampe - ympe)
-        cpp2 = second_tier * 0.04
+    if gross > CPP_YMPE:
+        second_tier = min(gross - CPP_YMPE, CPP_YAMPE - CPP_YMPE)
+        cpp2 = second_tier * CPP_RATE2
     return cpp1 + cpp2
 
 def calculate_ei(gross):
-    max_insurable = 65700
-    rate = 0.0164
-    return min(gross, max_insurable) * rate
+    """EI premiums."""
+    return min(gross, EI_MAX_INSURABLE) * EI_RATE
 
-# Streamlit app
+# App UI
 st.markdown("<h1 class='main-title'><span class='crooked-clock'>🕒</span> Time Well Spent <span class='money-bag'>💰</span></h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>By - <span class='logo'>Dirty Mike</span></p>", unsafe_allow_html=True)
 
@@ -311,69 +127,56 @@ This app helps you understand how much time you need to work to afford your purc
 **Assumptions:** Single filer, no other deductions/credits, 2080 working hours/year.
 """)
 
-# Sidebar for inputs
+# Sidebar
 with st.sidebar:
     st.header("Your Details")
     province = st.selectbox("Province", ["Nova Scotia", "Alberta"], index=0)
-    hourly_wage = st.number_input("Gross Hourly Wage ($)", min_value=0.0, value=25.0, step=0.01, help="Enter your pre-tax hourly pay rate.")
-    purchase = st.number_input("Purchase Amount ($)", min_value=0.0, value=100.0, step=0.01, help="Enter the cost of the item you want to buy.")
+    hourly_wage = st.number_input("Gross Hourly Wage ($)", min_value=0.0, value=25.0, step=0.01)
+    purchase = st.number_input("Purchase Amount ($)", min_value=0.0, value=100.0, step=0.01)
     calculate_button = st.button("Calculate")
 
-# Dynamic subtitle after sidebar
 st.markdown(f"<p style='text-align: center; color: #7f8c8d !important;'>For {province}, Canada (2025 rates)</p>", unsafe_allow_html=True)
 
 if calculate_button and hourly_wage > 0:
-    annual_gross = hourly_wage * 2080
-    
+    annual_gross = hourly_wage * ANNUAL_HOURS
     fed = federal_tax(annual_gross)
     prov, prov_code = prov_tax(annual_gross, province)
     cpp = calculate_cpp(annual_gross)
     ei = calculate_ei(annual_gross)
     total_deductions = fed + prov + cpp + ei
     net_annual = annual_gross - total_deductions
-    net_hourly = net_annual / 2080 if annual_gross > 0 else 0
+    net_hourly = net_annual / ANNUAL_HOURS
     
-    # Display results
+    # Results
     st.header("Your Income Breakdown")
     col1, col2 = st.columns(2)
     with col1:
-        st.metric("Annual Gross Income", f"${annual_gross:,.2f}", help="Based on 2080 hours/year")
-        st.metric("Net Annual Income", f"${net_annual:,.2f}", delta_color="inverse", help="After all deductions")
+        st.metric("Annual Gross Income", f"${annual_gross:,.2f}")
+        st.metric("Net Annual Income", f"${net_annual:,.2f}", delta_color="inverse")
     with col2:
-        st.metric("Net Hourly Rate", f"${net_hourly:,.2f}", help="Your effective take-home pay per hour")
+        st.metric("Net Hourly Rate", f"${net_hourly:,.2f}")
     
     with st.expander("View Detailed Deductions"):
         col3, col4 = st.columns(2)
         with col3:
-            st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
-            st.metric("Federal Tax", f"${fed:,.2f}")
-            st.metric(f"Provincial Tax ({prov_code})", f"${prov:,.2f}")
-            st.markdown("</div>", unsafe_allow_html=True)
+            with st.container():  # Wrap for warning styling
+                st.metric("Federal Tax", f"${fed:,.2f}")
+                st.metric(f"Provincial Tax ({prov_code})", f"${prov:,.2f}")
         with col4:
-            st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
-            st.metric("CPP Contribution", f"${cpp:,.2f}")
-            st.metric("EI Premium", f"${ei:,.2f}")
-            st.markdown("</div>", unsafe_allow_html=True)
-        st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
+            with st.container():
+                st.metric("CPP Contribution", f"${cpp:,.2f}")
+                st.metric("EI Premium", f"${ei:,.2f}")
         st.metric("Total Deductions", f"${total_deductions:,.2f}")
-        st.markdown("</div>", unsafe_allow_html=True)
     
-    if purchase > 0 and net_hourly > 0:
+    if purchase > 0:
         hours_needed = purchase / net_hourly
-        total_minutes = hours_needed * 60
         hours = int(hours_needed)
-        minutes = int(total_minutes % 60)
+        minutes = int((hours_needed * 60) % 60)
         st.header("Time to Afford Your Purchase")
         st.success(f"To afford **${purchase:,.2f}**, you need to work **{hours} hours and {minutes} minutes**. ⏰")
-        
-        # Your beloved snowflakes are back—gentle and magical! ❄️
         st.snow()
-        
-        # For that money vibe without errors: Static burst of cash emojis + Maple Leaf
-        st.markdown("""
-        <div style="text-align: center; font-size: 3em; margin: 10px 0;">
-            💵💰💎🍁
-        </div>
-        """, unsafe_allow_html=True)
+        st.markdown("<div style='text-align: center; font-size: 3em; margin: 10px 0;'>💵💰💎🍁</div>", unsafe_allow_html=True)
+    else:
+        st.success("Free purchase! 🎉 No work needed.")
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
