@@ -28,7 +28,7 @@ EI_RATE = 0.0164
 
 ANNUAL_HOURS = 2080
 
-# Ultra-clean CSS: Removed inline comments and version-specific classes to prevent any parsing leaks
+# Ultra-clean CSS: Added fixed bottom-right positioning for footer
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
@@ -54,6 +54,7 @@ st.markdown("""
     }
     .stButton > button { background-color: #3498db; color: white; border-radius: 5px; }
     .stButton > button:hover { background-color: #2980b9; }
+    .footer { position: fixed; bottom: 10px; right: 10px; color: #7f8c8d; font-size: 0.8em; z-index: 1000; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 5px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -166,3 +167,10 @@ if calculate_button and hourly_wage > 0:
         st.success("Free purchase! 🎉 No work needed.")
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
+
+# Fixed bottom-right footer with fitting emoji (🔊 for screams/power)
+st.markdown("""
+    <div class='footer'>
+        Powered by: Pookies Screams 🔊
+    </div>
+""", unsafe_allow_html=True)
