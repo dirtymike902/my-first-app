@@ -186,19 +186,35 @@ def federal_tax(income):
     credit = 0.145 * bpa_fed  # At lowest rate
     return max(gross_tax - credit, 0)
 
-def ns_tax(income):
-    brackets = [
-        (30507, 0.0879),
-        (61015, 0.1495),
-        (95883, 0.1667),
-        (154650, 0.1750),
-        (float('inf'), 0.210)
-    ]
+def prov_tax(income, province):
+    if province == "Nova Scotia":
+        brackets = [
+            (30507, 0.0879),
+            (61015, 0.1495),
+            (95883, 0.1667),
+            (154650, 0.1750),
+            (float('inf'), 0.210)
+        ]
+        bpa = 11744
+        lowest_rate = 0.0879
+        prov_code = "NS"
+    else:  # Alberta
+        brackets = [
+            (60000, 0.08),
+            (151234, 0.10),
+            (181481, 0.12),
+            (241974, 0.13),
+            (362961, 0.14),
+            (float('inf'), 0.15)
+        ]
+        bpa = 22323
+        lowest_rate = 0.08
+        prov_code = "AB"
+    
     gross_tax = calculate_progressive_tax(income, brackets)
     # Basic personal amount credit
-    bpa_ns = 11744
-    credit = 0.0879 * bpa_ns  # At lowest rate
-    return max(gross_tax - credit, 0)
+    credit = lowest_rate * bpa
+    return max(gross_tax - credit, 0), prov_code
 
 def calculate_cpp(gross):
     exemption = 3500
@@ -222,7 +238,6 @@ def calculate_ei(gross):
 # Streamlit app
 st.markdown("<h1 class='main-title'><span class='crooked-clock'>🕒</span> Time Well Spent <span class='money-bag'>💰</span></h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>By - <span class='logo'>Dirty Mike</span></p>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #7f8c8d !important;'>For Nova Scotia, Canada (2025 rates)</p>", unsafe_allow_html=True)
 
 st.write("""
 This app helps you understand how much time you need to work to afford your purchases, after accounting for taxes and deductions.
@@ -232,15 +247,19 @@ This app helps you understand how much time you need to work to afford your purc
 # Sidebar for inputs
 with st.sidebar:
     st.header("Your Details")
+    province = st.selectbox("Province", ["Nova Scotia", "Alberta"], index=0)
     hourly_wage = st.number_input("Gross Hourly Wage ($)", min_value=0.0, value=25.0, step=0.01, help="Enter your pre-tax hourly pay rate.")
     purchase = st.number_input("Purchase Amount ($)", min_value=0.0, value=100.0, step=0.01, help="Enter the cost of the item you want to buy.")
     calculate_button = st.button("Calculate")
+
+# Dynamic subtitle after sidebar
+st.markdown(f"<p style='text-align: center; color: #7f8c8d !important;'>For {province}, Canada (2025 rates)</p>", unsafe_allow_html=True)
 
 if calculate_button and hourly_wage > 0:
     annual_gross = hourly_wage * 2080
     
     fed = federal_tax(annual_gross)
-    prov = ns_tax(annual_gross)
+    prov, prov_code = prov_tax(annual_gross, province)
     cpp = calculate_cpp(annual_gross)
     ei = calculate_ei(annual_gross)
     total_deductions = fed + prov + cpp + ei
@@ -261,7 +280,7 @@ if calculate_button and hourly_wage > 0:
         with col3:
             st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
             st.metric("Federal Tax", f"${fed:,.2f}")
-            st.metric("Provincial Tax (NS)", f"${prov:,.2f}")
+            st.metric(f"Provincial Tax ({prov_code})", f"${prov:,.2f}")
             st.markdown("</div>", unsafe_allow_html=True)
         with col4:
             st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
@@ -283,14 +302,11 @@ if calculate_button and hourly_wage > 0:
         # Your beloved snowflakes are back—gentle and magical! ❄️
         st.snow()
         
-        # For that money vibe without errors: Static burst of cash emojis (no custom balloons needed)
+        # For that money vibe without errors: Static burst of cash emojis (no coins)
         st.markdown("""
         <div style="text-align: center; font-size: 3em; margin: 10px 0;">
-            💵💰🪙💎🤑
+            💵💰💎🤑
         </div>
         """, unsafe_allow_html=True)
-        
-        # Optional: Add balloons too for a full party (uncomment if you want 'em)
-        # st.balloons()
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
