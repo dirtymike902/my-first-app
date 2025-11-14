@@ -215,6 +215,15 @@ st.markdown("""
         .stSidebar .rc-select-selection__choice {
             color: #ffffff !important;
         }
+        /* Additional selector for the selected value span in BaseWeb/AntD */
+        .stSidebar .rc-select-selection-search-input input {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+        .stSidebar .rc-select-selection-selected-value {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
     }
     .stButton>button {
         background-color: #3498db;
