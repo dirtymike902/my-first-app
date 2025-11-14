@@ -5,11 +5,11 @@ st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# Custom CSS for styling
+# Custom CSS for styling - with Canadian flair: Red/white gradient bg
 st.markdown("""
     <style>
     .stApp {
-        background-color: #f0f4f8 !important;
+        background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important; /* Red-white-red maple vibe */
         color: #333333 !important;
     }
     body {
@@ -67,7 +67,7 @@ st.markdown("""
     /* Force light theme and dark text on iOS/mobile dark mode */
     @media (prefers-color-scheme: dark) {
         .stApp {
-            background-color: #f0f4f8 !important;
+            background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important;
             color: #333333 !important;
         }
         body {
@@ -126,7 +126,7 @@ st.markdown("""
     /* Mobile-specific tweaks for iOS Safari */
     @media (max-width: 768px) {
         .stApp {
-            background-color: #f0f4f8 !important;
+            background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important;
             color: #333333 !important;
         }
         body {
@@ -302,10 +302,10 @@ if calculate_button and hourly_wage > 0:
         # Your beloved snowflakes are back—gentle and magical! ❄️
         st.snow()
         
-        # For that money vibe without errors: Static burst of cash emojis (no coins)
+        # For that money vibe without errors: Static burst of cash emojis + Canadian flag
         st.markdown("""
         <div style="text-align: center; font-size: 3em; margin: 10px 0;">
-            💵💰💎🤑
+            💵💰💎🇨🇦
         </div>
         """, unsafe_allow_html=True)
 else:
