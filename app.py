@@ -28,7 +28,7 @@ EI_RATE = 0.0164
 
 ANNUAL_HOURS = 2080
 
-# Simplified CSS: Consolidated rules, removed redundancies (e.g., repeated color forces)
+# Cleaned CSS: Fixed invalid selectors (e.g., removed broken .st-emotion-cache-*), ensured valid syntax
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
@@ -64,7 +64,7 @@ st.markdown("""
             background-color: rgba(0,0,0,0.5) !important;
         }
         [data-testid="stMarkdown"] *, [data-testid="stText"] *, h1, h2, h3, p, span, div { color: #333333 !important; }
-        .st-emotion-cache-*, .css-1d391kg, .css-1inbwe5, .css-1v3b6i6 { color: #333333 !important; }
+        .css-1d391kg, .css-1inbwe5, .css-1v3b6i6 { color: #333333 !important; }
     }
     .stButton > button { background-color: #3498db; color: white; border-radius: 5px; }
     .stButton > button:hover { background-color: #2980b9; }
