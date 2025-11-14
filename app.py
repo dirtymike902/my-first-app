@@ -28,7 +28,7 @@ EI_RATE = 0.0164
 
 ANNUAL_HOURS = 2080
 
-# Ultra-clean CSS: Added fixed bottom-right positioning for footer
+# Refined CSS: Beefed up sidebar/mobile contrast rules to prevent blending (darker labels, sharper input text/bgs)
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
@@ -44,17 +44,17 @@ st.markdown("""
     .metric-value { font-size: 20px !important; color: #27ae60 !important; }
     .warning-metric .metric-value { color: #e74c3c !important; }
     @media (prefers-color-scheme: dark), (max-width: 768px) {
-        .stApp, body { background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important; color: #333333 !important; }
-        .main, .sidebar { background-color: #f0f4f8 !important; color: #333333 !important; }
-        .stSidebar { background-color: #f0f4f8 !important; color: #333333 !important; }
-        .stSidebar label, .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar p, .stSidebar span { color: #333333 !important; opacity: 1 !important; font-weight: 500 !important; }
+        .stApp, body { background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important; color: #000000 !important; }
+        .main, .sidebar { background-color: #f0f4f8 !important; color: #000000 !important; }
+        .stSidebar { background-color: #f0f4f8 !important; color: #000000 !important; }
+        .stSidebar label, .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar p, .stSidebar span { color: #000000 !important; opacity: 1 !important; font-weight: 600 !important; }
         .main-title, .subtitle, .section-header, .logo { color: #8B4513 !important; }
-        .stSidebar input[type="number"], .stSidebar [role="combobox"], .stSidebar select, .stSidebar option { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; background-color: rgba(0,0,0,0.5) !important; }
-        [data-testid="stMarkdown"] *, [data-testid="stText"] *, h1, h2, h3, p, span, div { color: #333333 !important; }
+        .stSidebar input[type="number"], .stSidebar [role="combobox"], .stSidebar select, .stSidebar option { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; background-color: #333333 !important; border: 1px solid #555 !important; }
+        [data-testid="stMarkdown"] *, [data-testid="stText"] *, h1, h2, h3, p, span, div { color: #000000 !important; }
+        .stSidebar .stSelectbox > div > div { background-color: #f0f4f8 !important; color: #000000 !important; }
     }
     .stButton > button { background-color: #3498db; color: white; border-radius: 5px; }
     .stButton > button:hover { background-color: #2980b9; }
-    .footer { position: fixed; bottom: 10px; right: 10px; color: #7f8c8d; font-size: 0.8em; z-index: 1000; background: rgba(255,255,255,0.8); padding: 5px 10px; border-radius: 5px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -167,10 +167,3 @@ if calculate_button and hourly_wage > 0:
         st.success("Free purchase! 🎉 No work needed.")
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
-
-# Fixed bottom-right footer with fitting emoji (🔊 for screams/power)
-st.markdown("""
-    <div class='footer'>
-        Powered by: Pookies Screams 🔊
-    </div>
-""", unsafe_allow_html=True)
