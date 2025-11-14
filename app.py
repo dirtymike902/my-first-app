@@ -207,6 +207,14 @@ st.markdown("""
             -webkit-text-fill-color: #ffffff !important;
             background-color: rgba(0,0,0,0.5) !important;
         }
+        /* Force selectbox value text to white */
+        .stSidebar .rc-select-selection__rendered {
+            color: #ffffff !important;
+            -webkit-text-fill-color: #ffffff !important;
+        }
+        .stSidebar .rc-select-selection__choice {
+            color: #ffffff !important;
+        }
     }
     .stButton>button {
         background-color: #3498db;
