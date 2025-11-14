@@ -122,4 +122,46 @@ with st.sidebar:
 if calculate_button and hourly_wage > 0:
     annual_gross = hourly_wage * 2080
     
-    fed
+    fed = federal_tax(annual_gross)
+    prov = ns_tax(annual_gross)
+    cpp = calculate_cpp(annual_gross)
+    ei = calculate_ei(annual_gross)
+    total_deductions = fed + prov + cpp + ei
+    net_annual = annual_gross - total_deductions
+    net_hourly = net_annual / 2080 if annual_gross > 0 else 0
+    
+    # Display results
+    st.header("Your Income Breakdown")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Annual Gross Income", f"${annual_gross:,.2f}", help="Based on 2080 hours/year")
+        st.metric("Net Annual Income", f"${net_annual:,.2f}", delta_color="inverse", help="After all deductions")
+    with col2:
+        st.metric("Net Hourly Rate", f"${net_hourly:,.2f}", help="Your effective take-home pay per hour")
+    
+    with st.expander("View Detailed Deductions"):
+        col3, col4 = st.columns(2)
+        with col3:
+            st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
+            st.metric("Federal Tax", f"${fed:,.2f}")
+            st.metric("Provincial Tax (NS)", f"${prov:,.2f}")
+            st.markdown("</div>", unsafe_allow_html=True)
+        with col4:
+            st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
+            st.metric("CPP Contribution", f"${cpp:,.2f}")
+            st.metric("EI Premium", f"${ei:,.2f}")
+            st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
+        st.metric("Total Deductions", f"${total_deductions:,.2f}")
+        st.markdown("</div>", unsafe_allow_html=True)
+    
+    if purchase > 0 and net_hourly > 0:
+        hours_needed = purchase / net_hourly
+        total_minutes = hours_needed * 60
+        hours = int(hours_needed)
+        minutes = int(total_minutes % 60)
+        st.header("Time to Afford Your Purchase")
+        st.success(f"To afford **${purchase:,.2f}**, you need to work **{hours} hours and {minutes} minutes**. ⏰")
+        st.snow()  # Changed to snowflakes for a different celebratory effect!
+else:
+    st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
