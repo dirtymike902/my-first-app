@@ -168,9 +168,9 @@ if calculate_button and hourly_wage > 0:
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
 
-# Fixed bottom-right footer
+# Fixed bottom-right footer with fitting emoji (🔊 for screams/power)
 st.markdown("""
     <div class='footer'>
-        Powered by: Pookies Screams
+        Powered by: Pookies Screams 🔊
     </div>
 """, unsafe_allow_html=True)
