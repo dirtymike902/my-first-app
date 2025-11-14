@@ -145,37 +145,38 @@ st.markdown("""
             -webkit-text-size-adjust: 100% !important;
             color: #333333 !important;
         }
+        /* Dark sidebar for white text contrast on mobile/iOS */
         .stSidebar {
-            background-color: #f0f4f8 !important;
-            color: #333333 !important; /* Black text for labels on light bg */
+            background-color: #121212 !important; /* Dark bg for visibility */
+            color: #ffffff !important; /* White text overall */
         }
         .stSidebar label {
-            color: #333333 !important;
+            color: #ffffff !important;
             opacity: 1 !important;
             font-weight: 500 !important;
         }
         .stSidebar .stSelectbox label {
-            color: #333333 !important;
+            color: #ffffff !important;
             opacity: 1 !important;
             font-weight: 500 !important;
         }
         .stSidebar h4 {
-            color: #333333 !important;
+            color: #ffffff !important;
         }
-        /* Match number input values: Bright white text on dark bg */
+        /* Number input: White text on dark bg */
         .stSidebar input[type="number"] {
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important; /* Semi-dark bg for contrast */
+            background-color: #333333 !important; /* Darker bg for better contrast */
         }
-        /* Selectbox selected value: White text on dark bg, label black */
+        /* Selectbox: White text on dark bg for selected value and dropdown */
         .stSidebar .stSelectbox div[data-baseweb="select"] {
-            background-color: rgba(0,0,0,0.5) !important;
+            background-color: #333333 !important;
         }
         .stSidebar .stSelectbox div[role="combobox"] {
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
+            background-color: #333333 !important;
         }
         .stSidebar .stSelectbox div[role="combobox"] input {
             color: #ffffff !important;
@@ -184,17 +185,17 @@ st.markdown("""
         .stSidebar .stSelectbox option {
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
+            background-color: #333333 !important;
         }
         .stSidebar .stSelectbox div[role="listbox"] div[role="option"] {
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
+            background-color: #333333 !important;
         }
         .stSidebar .stSelectbox > div > div > div > div > div {
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
+            background-color: #333333 !important;
         }
         /* Target common Streamlit emotion classes for selectbox text */
         .stSidebar .css-1d391kg, .stSidebar .css-1inbwe5, .stSidebar .css-1v3b6i6 {
@@ -205,7 +206,7 @@ st.markdown("""
         .stSidebar select, .stSidebar [data-baseweb="select"] input, .stSidebar [role="combobox"] input {
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
+            background-color: #333333 !important;
         }
         /* Force selectbox value text to white */
         .stSidebar .rc-select-selection__rendered {
@@ -223,6 +224,19 @@ st.markdown("""
         .stSidebar .rc-select-selection-selected-value {
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
+        }
+        /* Ensure dropdown listbox bg/text */
+        .stSidebar .rc-select-dropdown {
+            background-color: #333333 !important;
+            color: #ffffff !important;
+        }
+        .stSidebar .rc-select-item {
+            color: #ffffff !important;
+            background-color: #333333 !important;
+        }
+        .stSidebar .rc-select-item:hover {
+            background-color: #555555 !important;
+            color: #ffffff !important;
         }
     }
     .stButton>button {
