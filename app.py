@@ -280,19 +280,17 @@ if calculate_button and hourly_wage > 0:
         st.header("Time to Afford Your Purchase")
         st.success(f"To afford **${purchase:,.2f}**, you need to work **{hours} hours and {minutes} minutes**. ⏰")
         
-        # Back to your fave: Snowflakes falling like magical paychecks! ❄️💸
+        # Your beloved snowflakes are back—gentle and magical! ❄️
         st.snow()
         
-        # If you want both for double the fun (snow + balloons), uncomment below:
-        # st.balloons()
+        # For that money vibe without errors: Static burst of cash emojis (no custom balloons needed)
+        st.markdown("""
+        <div style="text-align: center; font-size: 3em; margin: 10px 0;">
+            💵💰🪙💎🤑
+        </div>
+        """, unsafe_allow_html=True)
         
-        # Or for a money twist, a burst of cash emojis rising up:
-        col_emoji1, col_emoji2, col_emoji3 = st.columns(3)
-        with col_emoji1:
-            st.balloons(emoji="💵")  # Dollar bills floating up
-        with col_emoji2:
-            st.balloons(emoji="🪙")  # Coins chiming in
-        with col_emoji3:
-            st.balloons(emoji="💰")  # Money bags joining the party
+        # Optional: Add balloons too for a full party (uncomment if you want 'em)
+        # st.balloons()
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
