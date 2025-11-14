@@ -279,6 +279,60 @@ if calculate_button and hourly_wage > 0:
         minutes = int(total_minutes % 60)
         st.header("Time to Afford Your Purchase")
         st.success(f"To afford **${purchase:,.2f}**, you need to work **{hours} hours and {minutes} minutes**. ⏰")
-        st.snow()  # Changed to snowflakes for a different celebratory effect!
+        
+        # Falling money animation instead of snow
+        st.markdown("""
+        <style>
+        @keyframes fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        .money-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        .money {
+            position: absolute;
+            font-size: 24px;
+            animation: fall linear infinite;
+        }
+        </style>
+        <div class="money-rain"></div>
+        <script>
+        function createMoneyRain() {
+            const moneyRain = document.querySelector('.money-rain');
+            if (!moneyRain) return;
+            const moneyEmojis = ['💵', '💰', '🪙', '💎'];
+            for (let i = 0; i < 50; i++) {
+                const money = document.createElement('div');
+                money.className = 'money';
+                money.innerHTML = moneyEmojis[Math.floor(Math.random() * moneyEmojis.length)];
+                money.style.left = Math.random() * 100 + '%';
+                money.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                money.style.animationDelay = Math.random() * 2 + 's';
+                moneyRain.appendChild(money);
+                setTimeout(() => {
+                    if (money.parentNode) {
+                        money.parentNode.removeChild(money);
+                    }
+                }, 5000);
+            }
+        }
+        // Trigger after a short delay to ensure DOM is ready
+        setTimeout(createMoneyRain, 100);
+        </script>
+        """, unsafe_allow_html=True)
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
