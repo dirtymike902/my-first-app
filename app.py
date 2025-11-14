@@ -47,7 +47,7 @@ st.markdown("""
         .stApp, body { background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important; color: #333333 !important; }
         .main, .sidebar { background-color: #f0f4f8 !important; color: #333333 !important; }
         .stSidebar { background-color: #f0f4f8 !important; color: #333333 !important; }
-        .stSidebar label, .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar h2, .stSidebar h3, .stSidebar p, .stSidebar span { color: #333333 !important; opacity: 1 !important; font-weight: 500 !important; }
+        .stSidebar label, .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar p, .stSidebar span { color: #333333 !important; opacity: 1 !important; font-weight: 500 !important; }
         .main-title, .subtitle, .section-header, .logo { color: #8B4513 !important; }
         .stSidebar input[type="number"], .stSidebar [role="combobox"], .stSidebar select, .stSidebar option { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; background-color: rgba(0,0,0,0.5) !important; }
         [data-testid="stMarkdown"] *, [data-testid="stText"] *, h1, h2, h3, p, span, div { color: #333333 !important; }
@@ -168,9 +168,9 @@ if calculate_button and hourly_wage > 0:
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
 
-# Fixed bottom-right footer with power emoji
+# Fixed bottom-right footer
 st.markdown("""
     <div class='footer'>
-        Powered by: Pookie 💪
+        Powered by: Pookies Screams
     </div>
 """, unsafe_allow_html=True)
