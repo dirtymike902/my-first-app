@@ -5,7 +5,7 @@ st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
 """, unsafe_allow_html=True)
 
-# Custom CSS for styling - including money rain styles
+# Custom CSS for styling
 st.markdown("""
     <style>
     .stApp {
@@ -63,33 +63,6 @@ st.markdown("""
     }
     .warning-metric .metric-value {
         color: #e74c3c !important;
-    }
-    /* Money rain animation */
-    @keyframes fall {
-        0% {
-            transform: translateY(-100vh) rotate(0deg);
-            opacity: 1;
-        }
-        100% {
-            transform: translateY(100vh) rotate(360deg);
-            opacity: 0;
-        }
-    }
-    .money-rain {
-        position: fixed !important;
-        top: 0;
-        left: 0;
-        width: 100vw !important;
-        height: 100vh !important;
-        pointer-events: none !important;
-        z-index: 9999 !important;
-        overflow: hidden !important;
-    }
-    .money {
-        position: absolute !important;
-        font-size: 24px !important;
-        animation: fall linear infinite !important;
-        will-change: transform !important;
     }
     /* Force light theme and dark text on iOS/mobile dark mode */
     @media (prefers-color-scheme: dark) {
@@ -166,9 +139,6 @@ st.markdown("""
         .stSidebar label {
             color: #333333 !important;
             opacity: 1 !important;
-        }
-        .money {
-            font-size: 18px !important; /* Smaller on mobile */
         }
     }
     .stButton>button {
@@ -310,46 +280,19 @@ if calculate_button and hourly_wage > 0:
         st.header("Time to Afford Your Purchase")
         st.success(f"To afford **${purchase:,.2f}**, you need to work **{hours} hours and {minutes} minutes**. ⏰")
         
-        # Trigger falling money using components.html for reliable JS execution
-        import streamlit.components.v1 as components
-        money_rain_html = """
-        <div id="money-rain" class="money-rain" style="display: none;"></div>
-        <script>
-        function createMoneyRain() {
-            const moneyRain = document.getElementById('money-rain');
-            if (!moneyRain || moneyRain.style.display !== 'none') return;
-            moneyRain.style.display = 'block';
-            const moneyEmojis = ['💵', '💰', '🪙', '💎', '🤑'];
-            const numBills = 60; // More for fuller effect
-            for (let i = 0; i < numBills; i++) {
-                const money = document.createElement('div');
-                money.className = 'money';
-                money.innerHTML = moneyEmojis[Math.floor(Math.random() * moneyEmojis.length)];
-                money.style.left = Math.random() * 100 + '%';
-                money.style.animationDuration = (Math.random() * 4 + 3) + 's'; // Slower fall
-                money.style.animationDelay = Math.random() * 2 + 's';
-                money.style.opacity = Math.random() * 0.5 + 0.5; // Vary opacity
-                moneyRain.appendChild(money);
-                // Auto-cleanup after animation
-                setTimeout(() => {
-                    if (money.parentNode) {
-                        money.parentNode.removeChild(money);
-                    }
-                }, 7000);
-            }
-            // Hide container after 10s to reset for next calc
-            setTimeout(() => {
-                moneyRain.style.display = 'none';
-                // Clear any remaining children
-                while (moneyRain.firstChild) {
-                    moneyRain.removeChild(moneyRain.firstChild);
-                }
-            }, 10000);
-        }
-        // Run immediately
-        createMoneyRain();
-        </script>
-        """
-        components.html(money_rain_html, height=0, width=0)
+        # Back to your fave: Snowflakes falling like magical paychecks! ❄️💸
+        st.snow()
+        
+        # If you want both for double the fun (snow + balloons), uncomment below:
+        # st.balloons()
+        
+        # Or for a money twist, a burst of cash emojis rising up:
+        col_emoji1, col_emoji2, col_emoji3 = st.columns(3)
+        with col_emoji1:
+            st.balloons(emoji="💵")  # Dollar bills floating up
+        with col_emoji2:
+            st.balloons(emoji="🪙")  # Coins chiming in
+        with col_emoji3:
+            st.balloons(emoji="💰")  # Money bags joining the party
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
