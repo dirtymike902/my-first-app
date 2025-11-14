@@ -9,10 +9,14 @@ st.markdown("""
 st.markdown("""
     <style>
     .stApp {
-        background-color: #f0f4f8;
+        background-color: #f0f4f8 !important;
+        color: #333333 !important;
+    }
+    body {
+        color: #333333 !important;
     }
     .main-title {
-        color: #8B4513;
+        color: #8B4513 !important;
         font-family: 'Arial', sans-serif;
         text-align: center;
         font-size: 2.5em;
@@ -29,7 +33,7 @@ st.markdown("""
         font-size: 1.2em;
     }
     .subtitle {
-        color: #8B4513;
+        color: #8B4513 !important;
         text-align: center;
         font-size: 1.2em;
         margin-top: -10px;
@@ -38,7 +42,7 @@ st.markdown("""
         font-family: 'Permanent Marker', cursive;
         font-size: 1.5em;
         background-color: #FFD700;
-        color: #8B4513;
+        color: #8B4513 !important;
         border-radius: 15px;
         padding: 8px 12px;
         display: inline-block;
@@ -46,18 +50,70 @@ st.markdown("""
         transform: rotate(-2deg); /* Slight tilt for sticker vibe */
     }
     .section-header {
-        color: #34495e;
+        color: #34495e !important;
         font-weight: bold;
     }
     .metric-label {
         font-size: 16px !important;
+        color: #333333 !important;
     }
     .metric-value {
         font-size: 20px !important;
-        color: #27ae60;
+        color: #27ae60 !important;
     }
     .warning-metric .metric-value {
-        color: #e74c3c;
+        color: #e74c3c !important;
+    }
+    /* Force light theme and dark text on iOS/mobile dark mode */
+    @media (prefers-color-scheme: dark) {
+        .stApp {
+            background-color: #f0f4f8 !important;
+            color: #333333 !important;
+        }
+        body {
+            background-color: #f0f4f8 !important;
+            color: #333333 !important;
+        }
+        .main, .sidebar {
+            background-color: #f0f4f8 !important;
+            color: #333333 !important;
+        }
+        h1, h2, h3, p, span, div {
+            color: #333333 !important;
+        }
+        .main-title {
+            color: #8B4513 !important;
+        }
+        .subtitle {
+            color: #8B4513 !important;
+        }
+        .section-header {
+            color: #34495e !important;
+        }
+        .logo {
+            color: #8B4513 !important;
+        }
+        .metric-label, .metric-value {
+            color: inherit !important;
+        }
+        /* Target Streamlit-specific elements */
+        [data-testid="stMarkdown"] *, [data-testid="stText"] *, [data-testid="stException"] * {
+            color: #333333 !important;
+        }
+        .st-emotion-cache-* {
+            color: #333333 !important;
+        }
+    }
+    /* Mobile-specific tweaks for iOS Safari */
+    @media (max-width: 768px) {
+        .stApp {
+            background-color: #f0f4f8 !important;
+            color: #333333 !important;
+        }
+        body {
+            -webkit-text-size-adjust: 100% !important;
+            color: #333333 !important;
+        }
     }
     .stButton>button {
         background-color: #3498db;
@@ -140,7 +196,7 @@ def calculate_ei(gross):
 # Streamlit app
 st.markdown("<h1 class='main-title'><span class='crooked-clock'>🕒</span> Time Well Spent <span class='money-bag'>💰</span></h1>", unsafe_allow_html=True)
 st.markdown("<p class='subtitle'>By - <span class='logo'>Dirty Mike</span></p>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #7f8c8d;'>For Nova Scotia, Canada (2025 rates)</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #7f8c8d !important;'>For Nova Scotia, Canada (2025 rates)</p>", unsafe_allow_html=True)
 
 st.write("""
 This app helps you understand how much time you need to work to afford your purchases, after accounting for taxes and deductions.
