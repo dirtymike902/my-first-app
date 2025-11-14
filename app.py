@@ -146,37 +146,31 @@ st.markdown("""
             color: #333333 !important;
         }
         .stSidebar {
-            color: #ffffff !important; /* Bright white for sidebar text on phone */
+            background-color: #f0f4f8 !important;
+            color: #333333 !important; /* Black text for labels on light bg */
         }
         .stSidebar label {
-            color: #ffffff !important;
+            color: #333333 !important;
             opacity: 1 !important;
             font-weight: 500 !important;
         }
         .stSidebar .stSelectbox label {
-            color: #ffffff !important;
+            color: #333333 !important;
             opacity: 1 !important;
             font-weight: 500 !important;
         }
-        /* Match number input values: Bright white text */
+        .stSidebar h4 {
+            color: #333333 !important;
+        }
+        /* Match number input values: Bright white text on dark bg */
         .stSidebar input[type="number"] {
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
             background-color: rgba(0,0,0,0.5) !important; /* Semi-dark bg for contrast */
         }
-        /* Ultra-aggressive fix for selectbox on iOS: Force white text everywhere inside, matching number inputs */
-        .stSidebar .stSelectbox {
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
-        }
-        .stSidebar .stSelectbox * {
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
-        }
+        /* Selectbox selected value: White text on dark bg, label black */
         .stSidebar .stSelectbox div[data-baseweb="select"] {
             background-color: rgba(0,0,0,0.5) !important;
-            color: #ffffff !important;
-            -webkit-text-fill-color: #ffffff !important;
         }
         .stSidebar .stSelectbox div[role="combobox"] {
             color: #ffffff !important;
@@ -207,15 +201,11 @@ st.markdown("""
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
         }
-        /* iOS Safari specific: Force white on all form controls in sidebar */
+        /* iOS Safari specific: Force white on all form controls in sidebar values */
         .stSidebar select, .stSidebar [data-baseweb="select"] input, .stSidebar [role="combobox"] input {
             color: #ffffff !important;
             -webkit-text-fill-color: #ffffff !important;
             background-color: rgba(0,0,0,0.5) !important;
-        }
-        /* Extra boost for sidebar header and labels on mobile */
-        .stSidebar h4 {
-            color: #ffffff !important;
         }
     }
     .stButton>button {
