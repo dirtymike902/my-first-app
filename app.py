@@ -28,7 +28,7 @@ EI_RATE = 0.0164
 
 ANNUAL_HOURS = 2080
 
-# Simplified CSS: Consolidated rules, removed redundancies (e.g., repeated color forces)
+# Simplified CSS: Consolidated rules, removed redundancies and invalid selectors to prevent parsing leaks/text dumps
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
@@ -51,6 +51,12 @@ st.markdown("""
     .metric-value { font-size: 20px !important; color: #27ae60 !important; }
     .warning-metric .metric-value { color: #e74c3c !important; }
     
+    /* Light mode defaults for selectbox readability (dark text on light bg) */
+    .stSidebar .stSelectbox div[role="combobox"] { color: #333333 !important; background-color: #f0f4f8 !important; }
+    .stSidebar .stSelectbox div[role="combobox"] input { color: #333333 !important; -webkit-text-fill-color: #333333 !important; }
+    .stSidebar [role="listbox"] { background-color: white !important; }
+    .stSidebar [role="option"] { color: #333333 !important; background-color: white !important; }
+    
     /* Unified dark/light mode & mobile overrides */
     @media (prefers-color-scheme: dark), (max-width: 768px) {
         .stApp, body { background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important; color: #333333 !important; }
@@ -58,10 +64,15 @@ st.markdown("""
         .stSidebar { background-color: #f0f4f8 !important; color: #333333 !important; }
         .stSidebar label, .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar p, .stSidebar span { color: #333333 !important; opacity: 1 !important; font-weight: 500 !important; }
         .main-title, .subtitle, .section-header, .logo { color: #8B4513 !important; }
+        /* Sidebar inputs: Force contrast for mobile/iOS */
         .stSidebar input[type="number"], .stSidebar [role="combobox"], .stSidebar select, .stSidebar option {
             color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;
             background-color: rgba(0,0,0,0.5) !important;
         }
+        .stSidebar .stSelectbox div[role="combobox"] { color: #ffffff !important; background-color: rgba(0,0,0,0.5) !important; }
+        .stSidebar .stSelectbox div[role="combobox"] input { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+        .stSidebar [role="listbox"] { background-color: rgba(0,0,0,0.5) !important; }
+        .stSidebar [role="option"] { color: #ffffff !important; background-color: rgba(0,0,0,0.5) !important; }
         [data-testid="stMarkdown"] *, [data-testid="stText"] *, h1, h2, h3, p, span, div { color: #333333 !important; }
         .css-1d391kg, .css-1inbwe5, .css-1v3b6i6 { color: #333333 !important; }
     }
