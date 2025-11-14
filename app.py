@@ -28,43 +28,29 @@ EI_RATE = 0.0164
 
 ANNUAL_HOURS = 2080
 
-# Cleaned CSS: Fixed invalid selectors (e.g., removed broken .st-emotion-cache-*), ensured valid syntax
+# Ultra-clean CSS: Removed inline comments and version-specific classes to prevent any parsing leaks
 st.markdown("""
     <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
     <style>
-    .stApp {
-        background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important;
-        color: #333333 !important;
-    }
+    .stApp { background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important; color: #333333 !important; }
     body { color: #333333 !important; }
     .main-title { color: #8B4513 !important; font-family: 'Arial', sans-serif; text-align: center; font-size: 2.5em; }
     .crooked-clock { display: inline-block; transform: rotate(-15deg); margin-right: 5px; }
     .money-bag { display: inline-block; transform: rotate(5deg); margin-left: 10px; font-size: 1.2em; }
     .subtitle { color: #8B4513 !important; text-align: center; font-size: 1.2em; margin-top: -10px; }
-    .logo {
-        font-family: 'Permanent Marker', cursive; font-size: 1.5em; background-color: #FFD700;
-        color: #8B4513 !important; border-radius: 15px; padding: 8px 12px; display: inline-block;
-        box-shadow: 2px 2px 5px rgba(0,0,0,0.3); transform: rotate(-2deg);
-    }
+    .logo { font-family: 'Permanent Marker', cursive; font-size: 1.5em; background-color: #FFD700; color: #8B4513 !important; border-radius: 15px; padding: 8px 12px; display: inline-block; box-shadow: 2px 2px 5px rgba(0,0,0,0.3); transform: rotate(-2deg); }
     .section-header { color: #34495e !important; font-weight: bold; }
     .metric-label { font-size: 16px !important; color: #333333 !important; }
     .metric-value { font-size: 20px !important; color: #27ae60 !important; }
     .warning-metric .metric-value { color: #e74c3c !important; }
-    
-    /* Unified dark/light mode & mobile overrides */
     @media (prefers-color-scheme: dark), (max-width: 768px) {
         .stApp, body { background: linear-gradient(135deg, #FF0000 0%, #FFFFFF 50%, #C8102E 100%) !important; color: #333333 !important; }
         .main, .sidebar { background-color: #f0f4f8 !important; color: #333333 !important; }
         .stSidebar { background-color: #f0f4f8 !important; color: #333333 !important; }
         .stSidebar label, .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar p, .stSidebar span { color: #333333 !important; opacity: 1 !important; font-weight: 500 !important; }
         .main-title, .subtitle, .section-header, .logo { color: #8B4513 !important; }
-        /* Sidebar inputs: Force contrast for mobile/iOS */
-        .stSidebar input[type="number"], .stSidebar [role="combobox"], .stSidebar select, .stSidebar option {
-            color: #ffffff !important; -webkit-text-fill-color: #ffffff !important;
-            background-color: rgba(0,0,0,0.5) !important;
-        }
+        .stSidebar input[type="number"], .stSidebar [role="combobox"], .stSidebar select, .stSidebar option { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; background-color: rgba(0,0,0,0.5) !important; }
         [data-testid="stMarkdown"] *, [data-testid="stText"] *, h1, h2, h3, p, span, div { color: #333333 !important; }
-        .css-1d391kg, .css-1inbwe5, .css-1v3b6i6 { color: #333333 !important; }
     }
     .stButton > button { background-color: #3498db; color: white; border-radius: 5px; }
     .stButton > button:hover { background-color: #2980b9; }
