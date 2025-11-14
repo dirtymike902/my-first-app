@@ -1,1 +1,167 @@
-https://streamlit.io/playground?example=hello&code=H4sIAAAAAAAAA71YWW4jNxp-1yk46gy0RJKrtEttGXC7k0ke0jBiYwaDRkOgqlgWYRZZIFmWlUafYYAA8zxXyJnmBHOE_Fxqs9VOGhNED5aq-K_fv9I0zYTUSGlJcMqoRljBQ6v1Cl3lSosUXd3coERIeHlklN-1lB6lWN7H4sC77Xa7heBzbg7Jhf09Uvoyy9BH-2A-Oxzd30mR83gYCSbkGr1KgmSaLF9bkk-OK8WUDzXVjNRYC_pxNCGz4HX5PhFcDxOcUnZco86lpJh1BkhhroaKSJpUlJo86iFm9I6vUUS4JrKhVZFIU8GHe4JjIk9onkynqxl5ovlA6N1er9FOsLjpBNGSRkOGd4TVhFkmRX8iaxTOs0f0F2pBx1yf4n7ALCenucfBCe4GUAtM5kFD6gFLDnEbOumf1VJIIItpNImaIOk3udaCX-zs18uhnUxXy3j3zLLDnuoajDshAe-hxDHN1RrNsseXNK734qERnRN6x6tlsFvVpZyf-ayELB2gnCuckC1mTBy2e52yza3MSa_VikmCIsyinGFNtpkUd5IoRR_IVuPHLuWRSMkA7SSoJFr11lZ2kfhXBSOqMSJgBBMViRGgVXCOLEPxtEaMKo1EgnSeMaJQN88yIreMplQPkASRvYYmI3ODglFgnzJJHhxt7aWp0ho_opXydQkdTZDzCV044uqoUPP1BnWd7GFNUQ_1rdgGecMO-10eE6bIadle_28K30FLum89l_UKfQue6j1BDAOG3semZ-agaQ8cF2i8H4Yf3gcf0GaDEiaw7nYoTzq9L7K2ISv8YFkl0bnkhtOlVUIgyTGrJZLXUTADaO9Lpd3ZYrKYDSCc4XTWG1Tvw3C6mAXmYBw0DxaL5XJsD-ZB_WA8m0zDqT1YNQ7q7prjySRwaeYcgJpSautS7QtqouWi8gYraDCQxUpwzBBOoUA1iiSJfRh2Gd4CJiA8nIfjlX3njm0Wg9sGWE8EAi8hhuJAIJRlbniIUzCjMnbopYBHvqC5-r2gT4JZsDBQBMvFqg7VPAxCH41VA_XVbLmc2IP5fNEIx2w6d3EKIV4vwT4O_2zYuXE7DBfT6VPUjd8ediD6v1CvbI-yzFF67MkjSTMzaUHlZBa4fnVMMwLPi3BSvMDuzTIc-zdQ6lSCJZoS6Rof4QrE4B0jIVCWFoE1pQ5rkPUyyywR5d0638BprnGYggYkZquZ13pDIsHjSi1IGhu0Wr6TOJ0XVlDVNpTl2hour7awzdANvH_uqVdNSCe7zmytmdaht658bWmfYk1oA2qAZEu5yqXxFeTOZwsPph0KNuThvCG8tHTQ5C67MmyDN9WCmGXNJfB8H6IIOq7adKotrnPxv__8-2d0S6F3PqgR-kFwciznpZDnZ_vw4oW53NSQ2fWTbDon9rlydVkky2gZv-5cmPHwTjxgdBMJTfEA1HIcY-iLwXhmPVK987PsJfVG_0HCzmJ33Ns9VcZvtCcsU-gocmCE3q5gC4vRXhxQmkd7SBdw1hxyAg1MC3QQ8t584wRmc2yOJMpyGe1hOQCwcQL2IxxFpmJhR7MTHEoL1gEjNyZxbtdT2B36_Uulcpetat3voxugh_gmlBE5QFwgAQNR1njOXHWCmnGwDKwpRsUebFBnR4LlyCxGPRtbGpMdllY95VmuVetA9R4wHyl35FILnt2i3G3_07jylmhMmWq7XDaS2XF7wHcmy4CW5-kOVhorsdv-my2F7ywR-och6n7VgwhA8m3tMrqBxBwg93M8M7-VJpl5CxVrgN-0vzEB9zBKMjRdyGlFGT7awI68MQXKpyy5Ls4uXat8wY4wCF4wxKwgkfBrHPyGdElt_A-wnJu47_JjYVBVr36Ltoa53912uUeagNDkObXLswrgCxS4mGDOc1gxXKPZNGj6NvKWyu2HdvTWl5I6s8dNigcg8vPz-Tk0oMaQMo3-ORWhDSLoUM9ptNDwospXZxr0OGuCbXXwl1BLzIneOhFA1nB5-ExQyeBTY1PnPnPVABA3pACcdslENbheobdUZcwkFlE50-pkDXzv1sM3Zlc1zaoIt2CQLPB37AINv_KUq-7YHdvyMjS14aH91azbvnS2uopxCiBBk_ZXH-tGrwejcfKpXaTkm-LCYR2syrzdO6XiHSzMXk1DQQVVKT4mTOOtbbKbNuVwE1Ok1HrpWhhjtc7Tbvo4PumjMcA3gx9N3lfqXdieeGexJkli7uv2hnVPhnsDvCl82H2sw15xpR30kccMcxuuv1Ny8C0LgHpbM7cyEMyd2LBNT4at7takeV1ozquYPhQjsXn_7rw0dJ7K81B96yoW3eJHDxMUisfns0zXUEWwMVLHh7rvbnqe2dTXZ7krF87Ah99jbIHH9E_D4-r6Gl0JDg_QHCGC3i9oGL8Fyjffo2tJUpqnnofQPxCJP9LlmtG3pr_V89WZ_rTtPXPky50otttyeJq2aCZPrZuWg8d8bJfZmm3HjpaS76zGUf0rzhoMYzaH_cuPqpK5j-ZBUyxQUK67darKt0qKoWlK_iuIaqBQ9Gu7i8JUvnTbmG0pxS7QxE3lUQQ3r24C4BfLW78PpeOpHdb9_uD5ttfvf7Qmf_JeGPg-etM-FXb3-yP033_90lS6MzGBQHZ7rer_HfAebo2iW199fCTsjDfiS9j91Y9yu4341W1gHuACwWh0jzrlotExFitCiuEGe8qvoW5jcQsWAAA
+import streamlit as st
+
+# Custom CSS for styling
+st.markdown("""
+    <style>
+    .stApp {
+        background-color: #f0f4f8;
+    }
+    .main-title {
+        color: #2c3e50;
+        font-family: 'Arial', sans-serif;
+        text-align: center;
+    }
+    .section-header {
+        color: #34495e;
+        font-weight: bold;
+    }
+    .metric-label {
+        font-size: 16px !important;
+    }
+    .metric-value {
+        font-size: 20px !important;
+        color: #27ae60;
+    }
+    .warning-metric .metric-value {
+        color: #e74c3c;
+    }
+    .stButton>button {
+        background-color: #3498db;
+        color: white;
+        border-radius: 5px;
+    }
+    .stButton>button:hover {
+        background-color: #2980b9;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
+def calculate_progressive_tax(income, brackets):
+    """
+    Calculate progressive tax based on brackets.
+    brackets: list of tuples (upper_limit, rate)
+    """
+    tax = 0.0
+    prev_limit = 0.0
+    for limit, rate in brackets:
+        if income > limit:
+            tax += (limit - prev_limit) * rate
+            prev_limit = limit
+        else:
+            tax += (income - prev_limit) * rate
+            break
+    else:
+        # For the last bracket if income > last limit
+        if brackets[-1][0] == float('inf'):
+            tax += (income - prev_limit) * brackets[-1][1]
+    return tax
+
+def federal_tax(income):
+    brackets = [
+        (57375, 0.145),
+        (114750, 0.205),
+        (177882, 0.260),
+        (253414, 0.290),
+        (float('inf'), 0.330)
+    ]
+    gross_tax = calculate_progressive_tax(income, brackets)
+    # Basic personal amount credit
+    bpa_fed = 16129
+    credit = 0.145 * bpa_fed  # At lowest rate
+    return max(gross_tax - credit, 0)
+
+def ns_tax(income):
+    brackets = [
+        (30507, 0.0879),
+        (61015, 0.1495),
+        (95883, 0.1667),
+        (154650, 0.1750),
+        (float('inf'), 0.210)
+    ]
+    gross_tax = calculate_progressive_tax(income, brackets)
+    # Basic personal amount credit
+    bpa_ns = 11744
+    credit = 0.0879 * bpa_ns  # At lowest rate
+    return max(gross_tax - credit, 0)
+
+def calculate_cpp(gross):
+    exemption = 3500
+    ympe = 71300
+    yampe = 81200
+    # First tier
+    pensionable1 = max(gross - exemption, 0)
+    cpp1 = min(pensionable1, ympe - exemption) * 0.0595
+    # Second tier
+    cpp2 = 0
+    if gross > ympe:
+        second_tier = min(gross - ympe, yampe - ympe)
+        cpp2 = second_tier * 0.04
+    return cpp1 + cpp2
+
+def calculate_ei(gross):
+    max_insurable = 65700
+    rate = 0.0164
+    return min(gross, max_insurable) * rate
+
+# Streamlit app
+st.markdown("<h1 class='main-title'>🕒 Time vs. Money Calculator</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #7f8c8d;'>For Nova Scotia, Canada (2025 rates)</p>", unsafe_allow_html=True)
+
+st.write("""
+This app helps you understand how much time you need to work to afford your purchases, after accounting for taxes and deductions.
+**Assumptions:** Single filer, no other deductions/credits, 2080 working hours/year.
+""")
+
+# Sidebar for inputs
+with st.sidebar:
+    st.header("Your Details")
+    hourly_wage = st.number_input("Gross Hourly Wage ($)", min_value=0.0, value=25.0, step=0.01, help="Enter your pre-tax hourly pay rate.")
+    purchase = st.number_input("Purchase Amount ($)", min_value=0.0, value=100.0, step=0.01, help="Enter the cost of the item you want to buy.")
+    calculate_button = st.button("Calculate")
+
+if calculate_button and hourly_wage > 0:
+    annual_gross = hourly_wage * 2080
+    
+    fed = federal_tax(annual_gross)
+    prov = ns_tax(annual_gross)
+    cpp = calculate_cpp(annual_gross)
+    ei = calculate_ei(annual_gross)
+    total_deductions = fed + prov + cpp + ei
+    net_annual = annual_gross - total_deductions
+    net_hourly = net_annual / 2080 if annual_gross > 0 else 0
+    
+    # Display results
+    st.header("Your Income Breakdown")
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric("Annual Gross Income", f"${annual_gross:,.2f}", help="Based on 2080 hours/year")
+        st.metric("Net Annual Income", f"${net_annual:,.2f}", delta_color="inverse", help="After all deductions")
+    with col2:
+        st.metric("Net Hourly Rate", f"${net_hourly:,.2f}", help="Your effective take-home pay per hour")
+    
+    with st.expander("View Detailed Deductions"):
+        col3, col4 = st.columns(2)
+        with col3:
+            st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
+            st.metric("Federal Tax", f"${fed:,.2f}")
+            st.metric("Provincial Tax (NS)", f"${prov:,.2f}")
+            st.markdown("</div>", unsafe_allow_html=True)
+        with col4:
+            st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
+            st.metric("CPP Contribution", f"${cpp:,.2f}")
+            st.metric("EI Premium", f"${ei:,.2f}")
+            st.markdown("</div>", unsafe_allow_html=True)
+        st.markdown("<div class='warning-metric'>", unsafe_allow_html=True)
+        st.metric("Total Deductions", f"${total_deductions:,.2f}")
+        st.markdown("</div>", unsafe_allow_html=True)
+    
+    if purchase > 0 and net_hourly > 0:
+        hours_needed = purchase / net_hourly
+        total_minutes = hours_needed * 60
+        hours = int(hours_needed)
+        minutes = int(total_minutes % 60)
+        st.header("Time to Afford Your Purchase")
+        st.success(f"To afford **${purchase:,.2f}**, you need to work **{hours} hours and {minutes} minutes**. ⏰")
+        st.snow()  # Changed to snowflakes for a different celebratory effect!
+else:
+    st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
