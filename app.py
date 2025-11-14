@@ -92,6 +92,14 @@ st.markdown("""
         .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar p, .stSidebar span {
             color: #333333 !important;
         }
+        /* Fix for selectbox in sidebar */
+        .stSidebar .stSelectbox label {
+            color: #333333 !important;
+            opacity: 1 !important;
+        }
+        .stSidebar .stSelectbox div[role="combobox"] {
+            color: #333333 !important;
+        }
         h1, h2, h3, p, span, div {
             color: #333333 !important;
         }
@@ -122,6 +130,10 @@ st.markdown("""
             color: #333333 !important;
             opacity: 1 !important;
         }
+        /* Extra for selectbox dropdown */
+        .stSidebar [data-testid="stSelectbox"] label, .stSidebar [data-testid="stSelectbox"] div {
+            color: #333333 !important;
+        }
     }
     /* Mobile-specific tweaks for iOS Safari */
     @media (max-width: 768px) {
@@ -139,6 +151,9 @@ st.markdown("""
         .stSidebar label {
             color: #333333 !important;
             opacity: 1 !important;
+        }
+        .stSidebar .stSelectbox label {
+            color: #333333 !important;
         }
     }
     .stButton>button {
@@ -302,10 +317,10 @@ if calculate_button and hourly_wage > 0:
         # Your beloved snowflakes are back—gentle and magical! ❄️
         st.snow()
         
-        # For that money vibe without errors: Static burst of cash emojis + Canadian flag
+        # For that money vibe without errors: Static burst of cash emojis + Maple Leaf
         st.markdown("""
         <div style="text-align: center; font-size: 3em; margin: 10px 0;">
-            💵💰💎🇨🇦
+            💵💰💎🍁
         </div>
         """, unsafe_allow_html=True)
 else:
