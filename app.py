@@ -1,4 +1,5 @@
 import streamlit as st
+import matplotlib.pyplot as plt
 
 # Constants for tax brackets and rates (2025)
 FEDERAL_BRACKETS = [
@@ -153,6 +154,17 @@ if calculate_button and hourly_wage > 0:
                 st.metric("CPP Contribution", f"${cpp:,.2f}")
                 st.metric("EI Premium", f"${ei:,.2f}")
         st.metric("Total Deductions", f"${total_deductions:,.2f}")
+        
+        # Pie chart for deductions breakdown
+        if total_deductions > 0:
+            fig, ax = plt.subplots(figsize=(6, 4))
+            labels = ['Federal Tax', f'Provincial Tax ({prov_code})', 'CPP', 'EI']
+            sizes = [fed, prov, cpp, ei]
+            colors = ['#ff9999', '#66b3ff', '#99ff99', '#ffcc99']
+            ax.pie(sizes, labels=labels, autopct='%1.1f%%', colors=colors, startangle=90)
+            ax.axis('equal')
+            ax.set_title('Deductions Breakdown (%)')
+            st.pyplot(fig)
     
     if purchase > 0:
         hours_needed = purchase / net_hourly
@@ -166,3 +178,6 @@ if calculate_button and hourly_wage > 0:
         st.success("Free purchase! 🎉 No work needed.")
 else:
     st.info("Enter your hourly wage and purchase amount in the sidebar, then click 'Calculate' to see results.")
+
+# Footer
+st.markdown("<p style='text-align: center; color: #7f8c8d; font-size: 0.9em; margin-top: 2em;'>Powered by: Pookies Screams</p>", unsafe_allow_html=True)
